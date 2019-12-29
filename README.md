@@ -1,2 +1,2 @@
-# SimpleC-Cases
+# SimpleCppCases
 Some simple C++ cases
