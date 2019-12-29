@@ -1,0 +1,98 @@
+1. copy data from ImuCamRecorder to kalibrWorkspace
+cp -rf ~/Documents/Code/libra/data/. ../../../RawData/20191017_SensingJAX52202/data02
+
+2. create the bag
+kalibr_bagcreater \
+--folder ~/Documents/Code/ROS/RawData/20191016_SensingJAX52202/data01 \
+--output-bag ./data01/data01.bag
+
+3. create 10 data folders
+mkdir ./data{01..10}
+
+4. create bags to each folder
+for n in {01..10}; do
+	echo "[${idx}]"
+	kalibr_bagcreater \
+	--folder ~/Document/Code/ROS/RawData20191112_SensingJAX52202/1_standard_moving/data${n}\
+	--output-bag ./data${n}/data${n}.bag
+done
+
+5. begin calibrate imu+rs_cam with some data.bags
+for n in {01..10}; do
+    cd ../data${n}
+    kalibr_calibrate_imu_camera \
+    --bag ./data${n}.bag \
+    --cam ../../../camSensingJAX52202.yaml \
+    --target ../../../april.yaml \
+    --imu ../../../imuSanChi.yaml \
+    --imu-models calibrated \
+    --timeoffset-padding 0.05 \
+    --dont-show-report \
+    |& tee ./output.txt
+done
+
+6. begin calibrate rs_cam with some data.bags
+for n in {01..10}; do
+    cd ../data${n}
+    kalibr_calibrate_rs_cameras --model pinhole-radtan-rs --target aprilgrid.yaml \
+    --bag MYROSBAG.bag --topic /camNormal/image_raw \
+    --inverse-feature-variance 1 --frame-rate 20
+done
+
+7. delete the bags 
+for n in {01..10}; do
+    rm data${n}.bag
+done
+
+
+
+kkk
+1. copy data from ImuCamRecorder to kalibrWorkspace
+cp -rf ~/Documents/Code/libra/data/. ../../../RawData/20191017_SensingJAX52202/data02
+
+2. create the bag
+kalibr_bagcreater \
+--folder ~/Documents/Code/ROS/RawData/20191016_SensingJAX52202/data01 \
+--output-bag ./data01/data01.bag
+
+3. create 10 data folders
+mkdir ./data{01..10}
+
+4. create bags to each folder
+for n in {01..10}; do
+	echo "[${idx}]"
+	kalibr_bagcreater \
+	--folder ~/Document/Code/ROS/RawData20191112_SensingJAX52202/1_standard_moving/data${n}\
+	--output-bag ./data${n}/data${n}.bag
+done
+
+5. begin calibrate imu+rs_cam with some data.bags
+for n in {01..10}; do
+    cd ../data${n}
+    kalibr_calibrate_imu_camera \
+    --bag ./data${n}.bag \
+    --cam ../../../camSensingJAX52202.yaml \
+    --target ../../../april.yaml \
+    --imu ../../../imuSanChi.yaml \
+    --imu-models calibrated \
+    --timeoffset-padding 0.05 \
+    --dont-show-report \
+    |& tee ./output.txt
+done
+
+6. begin calibrate rs_cam with some data.bags
+for n in {01..10}; do
+    cd ../data${n}
+    kalibr_calibrate_rs_cameras --model pinhole-radtan-rs --target aprilgrid.yaml \
+    --bag MYROSBAG.bag --topic /camNormal/image_raw \
+    --inverse-feature-variance 1 --frame-rate 20
+done
+
+7. delete the bags 
+for n in {01..10}; do
+    rm data${n}.bag
+done
+
+
+
+kkk
