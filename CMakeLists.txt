@@ -14,6 +14,7 @@ find_package(Glog REQUIRED)                                     # glog
 #find_package(Boost COMPONENTS filesystem date_time REQUIRED)    # boost
 #find_package(Eigen3 REQUIRED)                                   # Eigen
 #find_package(OpenCV 3 REQUIRED)                                 # OpenCV
+find_package(nlohmann_json 3.2.0 REQUIRED)                       # nlohmann_json
 
 # public and prive dependency include directories
 list(APPEND DEPEND_INCLUDES
@@ -24,7 +25,7 @@ list(APPEND DEPEND_INCLUDES
 
 # public and private dependency libraries
 list(APPEND DEPEND_LIBS
-        glog gflags
+        glog gflags nlohmann_json::nlohmann_json
         )
 
 include_directories(
@@ -71,4 +72,7 @@ add_subdirectory(stringToNumber)
 add_subdirectory(timestamp_ms_level)
 add_subdirectory(AfterLogError)
 add_subdirectory(forSelf--)
-
+add_subdirectory(andOperation)
+add_subdirectory(nlohmannJsonMultipleLayersNodeCreation)
+add_subdirectory(tableCornerPosCheck)
+add_subdirectory(gflags_glog)

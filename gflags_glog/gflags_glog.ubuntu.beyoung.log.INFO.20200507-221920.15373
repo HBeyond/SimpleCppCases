@@ -1,0 +1,4 @@
+Log file created at: 2020/05/07 22:19:20
+Running on machine: ubuntu
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I0507 22:19:20.794705 15373 gflags_glog.cpp:50] this student is not vip
